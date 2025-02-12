@@ -1,6 +1,62 @@
+#  Ansible vs Terraform
+
+##  Overview  
+| Tool       | Purpose                                  | Type          |
+|------------|----------------------------------------|--------------|
+| **Ansible**  | Configuration management and automation | Mutable Infrastructure |
+| **Terraform** | Infrastructure provisioning and orchestration | Immutable Infrastructure |
+
+---
+
+##  Key Differences  
+
+| Feature             | Ansible    | Terraform   |
+|---------------------|------------|-------------|
+| **Primary Use**     | Configures and manages existing servers | Provisions and manages infrastructure |
+| **Infrastructure Type** | Mutable (changes in place) | Immutable (rebuilds resources) |
+| **State Management** | Does not maintain state | Uses a state file to track resources |
+| **Execution Method** | Agentless, uses SSH or WinRM | Uses APIs to manage cloud resources |
+| **Idempotency** | Ensures repeated runs yield the same result | Uses declarative approach to enforce the desired state |
+| **Language** | YAML (Playbooks) | HCL (HashiCorp Configuration Language) |
+| **Cloud Integration** | Works with AWS, Azure, GCP, on-prem | Primarily used for cloud provisioning |
+
+---
+
+##  When to Use What?  
+**Use Ansible if:**  
+- You need to automate server configurations, application deployments, and updates.  
+- Your infrastructure already exists, and you want to manage it dynamically.  
+**Use Terraform if:**  
+- You need to provision, modify, and manage cloud infrastructure.  
+- You want an immutable and version-controlled approach to infrastructure management.  
+
+---
+
+## Can They Work Together?   
+Yes! Terraform can **provision infrastructure**, and Ansible can **configure** it.  
+For example:
+1. Use Terraform to create AWS EC2 instances.  
+2. Use Ansible to configure software on those instances.  
+
+# Terraform Configuration Files
+
+Terraform uses several configuration files to manage infrastructure as code:
+
+## main.tf
+This file is the core of Terraform configuration. It defines the resources want to create, such as EC2 instances, and specifies their properties.
+
+## variable.tf
+This file is used to define input variables, allowing to customize aspects of your infrastructure without changing the main configuration.
+
+## output.tf
+This file specifies the outputs of Terraform configuration, such as IP addresses or URLs, making it easy to find key information.
+
+## Importance
+Using Terraform ensures a uniform, standardized production environment for EC2 instances, enhancing consistency and reducing errors.
+
 # Terraform AWS EC2 Deployment with Security Groups
 
-This document details the steps to deploy an **AWS EC2 instance** using Terraform with a dedicated security group.
+# Steps to deploy an **AWS EC2 instance** using Terraform with a dedicated security group.
 
 ---
 
@@ -82,7 +138,7 @@ resource "aws_security_group" "tech501_maram_sg" {
 }
 
 ```
-2️⃣ Deployment Steps
+2️- Deployment Steps
 1- Initialize Terraform: Run the following command to initialize Terraform:
 ```bash
 terraform init
@@ -94,7 +150,7 @@ terraform init
 terraform plan
 ```
 
-3- Deploy the resources: 
+3- Deploy the resources (Destructive): 
 ```bash
 terraform apply 
 ```
