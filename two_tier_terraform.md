@@ -29,6 +29,7 @@ This Terraform setup provisions a **two-tier architecture** on **Azure**, includ
 provider "azurerm" {
   features {}
   subscription_id = "<YOUR_SUBSCRIPTION_ID>"
+  resource_provider_registrations = "none"
 }
 ```
 
